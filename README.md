@@ -106,11 +106,12 @@ gcloud pubsub topics add-iam-policy-binding classified-text-topic `
 echo '{"project_id":"infra-voyage-466111-u7","dataset_id":"metadata_repo","table_id":"test_table","text":"Scheduled DLP Scan","tags":["pii","scheduled"]}' > dlp_payload.json
 
 gcloud scheduler jobs create pubsub scheduled-dlp-job `
-  --schedule="0 * * * *" `
+  --schedule="3 * * * *" `
   --time-zone="Asia/Kolkata" `
   --topic=classified-text-topic `
   --message-body-from-file=dlp_payload.json `
-  --project=infra-voyage-466111-u7
+  --project=infra-voyage-466
+  111-u7
 ```
 
 ---
@@ -130,7 +131,7 @@ BigQuery table updated successfully.
 | Role             | Access Level                   |
 | ---------------- | ------------------------------ |
 | General Analysts | Masked Data via BigQuery Views |
-| Security Team    | Raw Data via Cloud Run + IAM   |
+| Security Team    | Raw Data via Clould Run + IAM   |
 
 ---
 
@@ -145,8 +146,7 @@ BigQuery table updated successfully.
 
 ## 🚩 Future Improvements
 
-- Add custom InfoTypes (e.g., Aadhaar, PAN)
-- Integrate with Looker for dashboarding
+-
 - Auto-label columns in BigQuery with sensitivity tags
 - Alerting via Cloud Monitoring
 
